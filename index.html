@@ -262,7 +262,7 @@ footer.site .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:
       <div class="offer hl"><div class="n">02</div><h4>Pack série</h4><div class="pr">25 €</div>
         <ul><li>5 photos d'un même lieu ou thème</li><li>Soit 5 € la photo au lieu de 8 €</li><li>JPEG pleine définition</li><li>Usage privé</li></ul></div>
       <div class="offer"><div class="n">03</div><h4>Collection complète</h4><div class="pr">59 €</div>
-        <ul><li>Les 20 photos de la galerie</li><li>Le meilleur prix par photo</li><li>JPEG pleine définition</li><li>Usage privé</li></ul></div>
+        <ul><li>Les 18 photos de la galerie</li><li>Le meilleur prix par photo</li><li>JPEG pleine définition</li><li>Usage privé</li></ul></div>
     </div>
     <div class="packs reveal" id="packs"></div>
     <p class="note mono reveal">Les aperçus du site sont réduits et filigranés. Le fichier propre est envoyé par lien de téléchargement après paiement.</p>
@@ -366,11 +366,9 @@ const photos=[
   {id:"verriere",t:"Verrière",cat:"Industrie",story:"Le toit de verre s'est ouvert, la végétation est entrée. Le couloir se referme lentement sous les lianes."},
   {id:"voie-sans-issue",t:"Voie sans issue",cat:"Rail",story:"Au ras des traverses, les rails filent vers une tour de chargement qui ne charge plus rien."},
   {id:"l-escalier",t:"L'escalier",cat:"Souterrains",story:"Dans le noir complet, un escalier de fer qui monte vers une lumière froide. On ne sait pas ce qu'il y a en haut."},
-  {id:"equipage",t:"Équipage",cat:"Explorateurs",story:"Masqués, immobiles, au milieu des wagonnets. Une pose longue, une seconde d'éternité."},
   {id:"sous-le-convoyeur",t:"Sous le convoyeur",cat:"Rail",story:"À l'ombre de la structure, les voies continuent. Les feuilles ont déjà commencé à tout recouvrir."},
   {id:"le-gardien",t:"Le gardien",cat:"Industrie",story:"Le château d'eau, vu à travers les arbres. Il surveille encore le site, même si plus personne ne passe."},
   {id:"lumiere-octobre",t:"Lumière d'octobre",cat:"Rail",story:"Contre-jour doré sur un convoi immobile. La nature avance, mètre par mètre."},
-  {id:"les-guetteurs",t:"Les guetteurs",cat:"Explorateurs",story:"Sur le quai de chargement, on observe la tour de brique et ses fenêtres brisées. Le calme avant de monter."},
   {id:"reflet",t:"Reflet",cat:"Rail",story:"Une flaque, un soleil bas, un wagon tagué. Le ciel tombé par terre."},
 ].map(p=>({...p,src:`photos/${p.id}.jpg`}));
 const lic=[{k:"perso",n:"Personnel",d:"Fond d'écran, impression privée",p:8}];
@@ -379,7 +377,7 @@ const packs=[
   {id:"pk-industrie",t:"Pack Industrie",p:25,d:"Halls, salles de contrôle et verrières. 5 photos d'usines et de mines abandonnées.",ids:["salle-controle","cathedrale-fer","pont-roulant","salle-pendus","verriere"]},
   {id:"pk-rail",t:"Pack Rail",p:25,d:"Wagons tagués, voies envahies par la mousse, lumière d'orage. 5 photos.",ids:["couloir-wagons","le-marcheur","voie-sans-issue","sous-le-convoyeur","reflet"]},
   {id:"pk-noir",t:"Pack Sous terre",p:25,d:"Galeries, escaliers et objets oubliés dans le noir, à la lampe. 5 photos.",ids:["carreaux","fourgon","l-escalier","trophee-1986","pharmacie"]},
-  {id:"pk-collection",t:"Collection complète",p:59,d:"Les 20 photos de la galerie d'un coup, au meilleur prix par photo.",ids:photos.map(p=>p.id)},
+  {id:"pk-collection",t:"Collection complète",p:59,d:`Les ${photos.length} photos de la galerie d'un coup, au meilleur prix par photo.`,ids:photos.map(p=>p.id)},
 ].map(k=>({...k,n:k.ids.length}));
 document.getElementById('packs').innerHTML=packs.map(k=>`<div class="pack"><div class="thumbs">${k.ids.slice(0,5).map(i=>`<i style="background:url(photos/${i}.jpg) center/cover"></i>`).join('')}</div><h5>${k.t}</h5><p>${k.d}</p><div class="row"><span><b>${k.p} €</b><s>${k.n*8} €</s></span><button class="btn" onclick="addPack('${k.id}')">Ajouter</button></div></div>`).join('');
 function addPack(id){const k=packs.find(x=>x.id===id);cart.push({name:k.t,detail:k.n+' photos · JPEG pleine définition',price:k.p});updateCart();toast(`« ${k.t} » ajouté au panier`)}
